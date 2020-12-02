@@ -2,35 +2,33 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const dayjs = require('dayjs')
 
-const userSchema = new Schema({
+const tripSchema = new Schema({
   id: {
     type: String,
     required: true,
     unique: true,
     default: Math.floor(new Date().valueOf() * Math.random())
   },
-  email: {
+  userid: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  startDate: {
     type: String,
     required: true,
-    unique: true
   },
-  userName: {
+  endDate: {
     type: String,
     required: true
   },
-  age: {
-    type: String,
-    required: true
-  },
-  sex: {
+  night: {
     type: String,
     required: true
   },
   createdAt: {
     type: String,
-    required: true,
     default: dayjs().format('YYYY-MM-DD HH:mm:ss')
   },
 })
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Trip', tripSchema)
