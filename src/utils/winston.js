@@ -11,14 +11,14 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
 const options = {
   file: {
     level: 'info',
-    filename: `${appRoot}/logs/dapp-service.log`,
+    filename: `${appRoot}/logs/jeju-service.log`,
     handleExceptions: true,
     json: false,
     maxsize: 5242880, // 5MB
     maxFiles: 100,
     colorize: false,
     format: combine(
-      label({ label: 'dapp-service' }),
+      label({ label: 'jeju-service' }),
       timestamp(),
       myFormat
     )
