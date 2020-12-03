@@ -9,7 +9,7 @@ router.post('/join', async (req, res, next) => {
   const result = await service.create_user(email, password, username, age, sex)
   if (!result.status) return res.json({ success: false, message: result.message, action: actions.AUTH_ERROR })
 
-  return res.json({ success: true, message: result.message, action: actions.JOIN })
+  return res.json({ success: true, message: result.message, data: {}, action: actions.JOIN })
 })
 
 router.post('/login', async (req, res, next) => {
