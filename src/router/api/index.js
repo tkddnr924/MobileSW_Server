@@ -44,7 +44,7 @@ router.post('/status', async (req, res, next) => {
 
 router.post('/logout', async (req, res, next) => {
   res.clearCookie('JTA_LOGIN_TOKEN');
-  return res.json({ success: true, message: '로그아웃!', action: actions.LOGOUT })
+  return res.json({ success: true, message: '로그아웃!', action: actions.LOGOUT, data: {} })
 })
 
 module.exports = router
