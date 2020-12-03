@@ -21,7 +21,7 @@ router.post('/login', async (req, res, next) => {
 
   if (!result.status) return res.json({ success: false, message: result.message, action: actions.AUTH_ERROR })
 
-  const options = { maxAge: expiresIn, httpOnly: true, secure: true};
+  const options = { maxAge: exp, httpOnly: true, secure: true};
   res.cookie('JTA_LOGIN_TOKEN', result.data.token, options)
 
   return res.json({ success: true, message: result.message, data: result.data, action: actions.LOGIN })
@@ -36,7 +36,7 @@ router.post('/status', async (req, res, next) => {
 
   if (!result.status) return res.json({ success: false, message: result.message, action: actions.AUTH_ERROR })
 
-  const options = { maxAge: expiresIn, httpOnly: true, secure: true};
+  const options = { maxAge: exp, httpOnly: true, secure: true};
   res.cookie('JTA_LOGIN_TOKEN', result.data.token, options)
 
   return res.json({ success: true, message: result.message, data: result.data, action: actions.STATUS })
