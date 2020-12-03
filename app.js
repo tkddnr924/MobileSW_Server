@@ -23,12 +23,12 @@ const init = server => {
   server.use(cookieParser())
 
   server.use(async (req, res, next) => {
-    console.log(req.cookies.JTA_LOGIN_TOKEN)
-    console.log("-----------")
-    const tokenChk = await jwt.check_firebase_token(req.cookies.JTA_LOGIN_TOKEN)
-    if (tokenChk.success) {
-      req.user_info = tokenChk.data.tokenData
-      req.is_login = tokenChk.data.login
+    if (req.cookies.JTA_LOGIN_TOKEN !== undefined) {
+      const tokenChk = await jwt.check_firebase_token(req.cookies.JTA_LOGIN_TOKEN)
+      if (tokenChk.success) {
+        req.user_info = tokenChk.data.tokenData
+        req.is_login = tokenChk.data.login
+      }
     }
     next()
   })
