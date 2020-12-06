@@ -34,12 +34,9 @@ class Helper {
     return admin.auth().verifyIdToken(idToken)
       .then(decodedIdToken => {
         if (new Date().getTime() / 1000 - decodedIdToken.auth_time < 5 * 60) {
-          // Create session cookie and set it.
           const sessionCookie = admin.auth().createSessionCookie(idToken, {expiresIn: exp});
           return { status: true, message: '로그인 성공', token: sessionCookie }
         }
-        // A user that was not recently signed in is trying to set a session cookie.
-        // To guard against ID token theft, require re-authentication.
         return { status: false, message: '재 로그인 필요'}
       })
   }

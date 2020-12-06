@@ -21,7 +21,7 @@ const tripSchema = new Schema({
     type: String,
     required: true
   },
-  night: {
+  person: {
     type: String,
     required: true
   },
