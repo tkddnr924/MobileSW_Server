@@ -14,7 +14,6 @@ router.post('/join', async (req, res, next) => {
 
 router.post('/login', async (req, res, next) => {
   const { token } = req.body
-  console.log("[TOKEN] " + token)
   const service = new AuthService()
 
   const exp = 60 * 60 * 24 * 5 * 1000
