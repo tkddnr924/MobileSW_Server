@@ -17,6 +17,22 @@ class Helper {
       return { status: false, message: error.message }
     })
   }
+
+  async getTripByUserID (userID) {
+    return tripModel.findTripByUserID(userID).then((trip) => {
+      return { status: true, message: "여행 불러오기 완료", data: { trip: trip } }
+    }).catch(error => {
+      return { status: false, message: error.message }
+    })
+  }
+
+  async getTripCountByUserID (userID) {
+    return tripModel.countTripByUserID(userID).then((count) => {
+      return { count: count }
+    }).catch(error => {
+      return { count: 0 }
+    })
+  }
 }
 
 module.exports = Helper

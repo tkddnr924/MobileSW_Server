@@ -7,5 +7,6 @@ module.exports = {
   "AUTH_ERROR": "auth.error",
   // Trip
   "ADD_TRIP": "trip.add",
+  "REMIND_TRIP": "trip_remind",
   "TRIP_ERROR": "trip.error"
 }
