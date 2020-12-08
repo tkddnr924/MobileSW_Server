@@ -3,12 +3,6 @@ const Schema = mongoose.Schema
 const dayjs = require('dayjs')
 
 const userSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-    unique: true,
-    default: Math.floor(new Date().valueOf() * Math.random())
-  },
   email: {
     type: String,
     required: true,
