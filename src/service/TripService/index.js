@@ -1,5 +1,5 @@
 const helper = require('./Helper')
-
+const db = require('mongoose')
 
 class TripService {
   constructor() {
@@ -19,8 +19,25 @@ class TripService {
     if (!result.status) return { status: false, message: result.message}
 
     const tripSize = await this.dbh.getTripCountByUserID(userID)
-
     result.data.count = tripSize.count[0].trips
+
+    return result
+  }
+
+  async add_destination (id, name, time, day, lat, lng) {
+    const tripID = db.Types.ObjectId(id)
+    const result = await this.dbh.addDestination(tripID, name, time, day, lat, lng)
+
+    if (!result.status) return { status: false, message: result.message }
+
+    return result
+  }
+
+  async get_destination (id) {
+    const tripID = db.Types.ObjectId(id)
+    const result = await this.dbh.getDestination(tripID)
+
+    if (!result.status) return { status: false, message: result.message }
 
     return result
   }

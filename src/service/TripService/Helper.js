@@ -1,4 +1,5 @@
 const tripModel = require("../../models/Trip")
+const desModel = require("../../models/Destination")
 
 class Helper {
   constructor () {}
@@ -31,6 +32,31 @@ class Helper {
       return { count: count }
     }).catch(error => {
       return { count: 0 }
+    })
+  }
+
+  async addDestination (tripID, name, time, day, lat, lng) {
+    const destination = new desModel({
+      tripID: tripID,
+      name: name,
+      time: time,
+      day: day,
+      latitude: lat,
+      longitude: lng
+    })
+
+    return destination.save().then(() => {
+      return { status: true, message: "여행지 저장 성공" }
+    }).catch(error => {
+      return { status: false, message: error.message }
+    })
+  }
+
+  async getDestination (tripID) {
+    return desModel.getDestinationByTripID(tripID).then((dest) => {
+      return { status: true, message: "여행지 불러오기 완료", data: {destination: dest} }
+    }).catch(error => {
+      return { status: false, message: error.message }
     })
   }
 }

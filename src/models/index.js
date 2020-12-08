@@ -6,6 +6,7 @@ const autoIncrement = require('mongoose-auto-increment')
 module.exports.initSchemas = () => {
   require('./user')
   require('./Trip')
+  require('./Destination')
 }
 
 module.exports.connect = () => {
