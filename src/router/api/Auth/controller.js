@@ -23,6 +23,8 @@ exports.userLogin = async (req, res, next) => {
   const options = { maxAge: exp, httpOnly: true, secure: true};
   res.cookie('JTA_LOGIN_TOKEN', result.data.token, options)
 
+  console.log(token)
+
   return res.json({ success: true, message: result.message, data: result.data, action: actions.LOGIN })
 }
 

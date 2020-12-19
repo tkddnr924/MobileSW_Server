@@ -35,9 +35,11 @@ class Helper {
       .then(decodedIdToken => {
         if (new Date().getTime() / 1000 - decodedIdToken.auth_time < 5 * 60) {
           const sessionCookie = admin.auth().createSessionCookie(idToken, {expiresIn: exp});
-          return { status: true, message: '로그인 성공', token: sessionCookie }
+          return { status: true, message: '로그인 성공', token: sessionCookie, data: {} }
         }
         return { status: false, message: '재 로그인 필요'}
+      }).catch(error => {
+        return { status: false, message: error.message }
       })
   }
 }
