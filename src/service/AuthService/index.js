@@ -1,4 +1,5 @@
 const helper = require('./Helper')
+const UserModel = require('../../models/user')
 const req_mail = /^\S*\@[a-zA-Z]*(\.[a-zA-Z]{2,})+$/
 const req_pw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$/
 
@@ -32,8 +33,10 @@ class AuthService {
   async sign_check (idToken, exp) {
     const result = await this.dbh.check_status(idToken, exp)
 
+    const userInfo = await UserModel.findUser(result.user)
+
     if (result.status) {
-      return { status: true, message: result.message, data: { token: result.token }}
+      return { status: true, message: result.message, data: { token: result.token, user: userInfo[0] }}
     }
     return { status: false, message: result.message }
   }

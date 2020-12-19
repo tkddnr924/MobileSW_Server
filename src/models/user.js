@@ -28,7 +28,9 @@ const userSchema = new Schema({
 })
 
 userSchema.statics.findUser = async function (userEmail) {
-  return this.findOne({ email: userEmail }).exec()
+  return this.aggregate([
+    { $match: { email: userEmail } },
+  ]).exec()
 }
 
 module.exports = mongoose.model('User', userSchema)

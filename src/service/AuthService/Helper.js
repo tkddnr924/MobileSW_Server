@@ -33,9 +33,11 @@ class Helper {
   async check_status (idToken, exp) {
     return admin.auth().verifyIdToken(idToken)
       .then(decodedIdToken => {
-        if (new Date().getTime() / 1000 - decodedIdToken.auth_time < 5 * 60) {
-          const sessionCookie = admin.auth().createSessionCookie(idToken, {expiresIn: exp});
-          return { status: true, message: '로그인 성공', token: sessionCookie, data: {} }
+        if (new Date().getTime() / 1000 - decodedIdToken.auth_time < exp) {
+          return admin.auth().createSessionCookie(idToken, { expiresIn: exp }).then(cookie => {
+            const email = decodedIdToken.email
+            return { status: true, message: '로그인 성공', token: cookie, user: email }
+          })
         }
         return { status: false, message: '재 로그인 필요'}
       }).catch(error => {
