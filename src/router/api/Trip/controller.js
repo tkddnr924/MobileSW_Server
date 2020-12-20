@@ -10,7 +10,7 @@ exports.addTrip = async (req, res, next) => {
 
   if (!result.status) return res.json({ success: false, message: result.message, action: actions.TRIP_ERROR })
 
-  return res.json({ success: true, message: result.message, action: actions.ADD_TRIP })
+  return res.json({ success: true, message: result.message, action: actions.ADD_TRIP, data: result.data })
 }
 
 exports.remindTrip = async (req, res, next) => {

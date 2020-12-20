@@ -13,7 +13,7 @@ class Helper {
     })
 
     return trip.save().then(() => {
-      return { status: true, message: "여행 저장 성공" }
+      return { status: true, message: "여행 저장 성공", data: { tripID: trip._id } }
     }).catch(error => {
       return { status: false, message: error.message }
     })
