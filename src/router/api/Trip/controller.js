@@ -46,5 +46,5 @@ exports.getAllDestination = async (req, res, next) => {
 const getUserID = async (req) => {
   const userEmail = req.user_info.email
   const user = await UserModel.findUser(userEmail)
-  return user._id
+  return user[0]._id
 }
