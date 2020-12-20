@@ -19,7 +19,11 @@ class TripService {
     if (!result.status) return { status: false, message: result.message}
 
     const tripSize = await this.dbh.getTripCountByUserID(userID)
-    result.data.count = tripSize.count[0].trips
+    if (tripSize.count.length !== 0) {
+      result.data.count = tripSize.count[0].trips
+    } else {
+      result.data.count = 0
+    }
 
     return result
   }
